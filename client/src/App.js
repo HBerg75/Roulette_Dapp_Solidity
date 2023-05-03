@@ -1,23 +1,22 @@
-import logo from './logo.svg';
+import React from 'react';
 import './App.css';
+import { useEthers } from '@usedapp/core';
+import Roulette from '../src/components/roulette';
 
 function App() {
+  const { activateBrowserWallet, account } = useEthers();
+
+  function handleClick() {
+    console.log('clicked');
+    console.log(account, 'account');
+    console.log(activateBrowserWallet, 'activateBrowserWallet');
+    activateBrowserWallet();
+  }
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      {!account && <button onClick={handleClick}>Connect Wallet</button>}
+      {account && <Roulette />}
     </div>
   );
 }

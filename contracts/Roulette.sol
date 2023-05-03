@@ -38,7 +38,7 @@ contract Roulette {
         require(msg.sender == owner, "Only the owner can play");
 
         // Generate a random number between 0 and 36
-        uint256 randomNumber = uint256(keccak256(abi.encodePacked(block.timestamp, block.difficulty))) % 37;
+        uint256 randomNumber = uint256(keccak256(abi.encodePacked(block.timestamp, block.prevrandao))) % 37;
 
         // Determine the winning amount and update the contract state
         for (uint256 i = 0; i < 37; i++) {
